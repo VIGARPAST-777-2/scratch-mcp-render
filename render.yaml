@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: scratch-mcp
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    healthCheckPath: /mcp
+    envVars:
+      - key: FASTMCP_TRANSPORT
+        value: streamable-http
+      - key: FASTMCP_HOST
+        value: "0.0.0.0"
+      - key: SCRATCH_MCP_DATA_DIR
+        value: /data
+      - key: FASTMCP_STATELESS_HTTP
+        value: "true"
+    disk:
+      name: scratch-mcp-data
+      mountPath: /data
+      sizeGB: 1
